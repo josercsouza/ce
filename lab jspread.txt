@@ -1,0 +1,73 @@
+- @types/jspreadsheet-ce/index.d.ts
+linhas
++125    'number'
+
++650    /** Define the number of freeze columns on left with tableOverflow=true */
++651    freezeColumns?:number | undefined;
++652    /** Include headers on copy cells */
++653    includeHeadersOnCopy?: boolean | undefined;
+
+---------------------------------
+- node_modules\jspreadsheet-ce\src\index.js
++/- linha 13065
+        obj.updateFreezePosition = function() {
+            scrollLeft = obj.content.scrollLeft;
+            var width = 0;
+            if (scrollLeft > 50) {
+                for (var i = 0; i < obj.options.freezeColumns; i++) {
+                    if (i > 0) {
+                        // width += parseInt(obj.options.columns[i-1].width);
+                        // Must check if the previous column is hidden or not to determin whether the width shoule be added or not!
+                        if (obj.options.columns[i - 1].type !== "hidden") {
+                            width += parseInt(obj.options.columns[i - 1].width);
+                        }
+                    }
+                    obj.headers[i].classList.add('jexcel_freezed');
+                    obj.headers[i].style.left = width + 'px';
+                    for (var j = 0; j < obj.rows.length; j++) {
+                        if (obj.rows[j] && obj.records[j][i]) {
+                            // var shifted = (scrollLeft + (i > 0 ? obj.records[j][i-1].style.width : 0)) - 51 + 'px';
+                            var indexColumnWidth = (obj.table.classList.contains('jexcel_hidden_index') ? 1 : 51)
+                            var shifted = (scrollLeft + (i > 0 ? obj.records[j][i-1].style.width : 0)) - indexColumnWidth + 'px';
+                            obj.records[j][i].classList.add('jexcel_freezed');
+                            obj.records[j][i].style.left = shifted;
+                        }
+                    }
+                }
+            } else {
+                for (var i = 0; i < obj.options.freezeColumns; i++) {
+                    obj.headers[i].classList.remove('jexcel_freezed');
+                    obj.headers[i].style.left = '';
+                    for (var j = 0; j < obj.rows.length; j++) {
+                        if (obj.records[j][i]) {
+                            obj.records[j][i].classList.remove('jexcel_freezed');
+                            obj.records[j][i].style.left = '';
+                        }
+                    }
+                }
+            }
+
+            // Place the corner in the correct place
+            obj.updateCornerPosition();
+        }
+
+
+================================
+
+instance.thead.firstElementChild.children[x].style.backgroundColor = "red";
+
+colocar a seta de order na esquerda quando a coluna for alinhada a direita (serve para up/down)
+
+element.style {
+    text-align: right;
+    background-position: left center;
+}
+
+----------
+
+.jexcel > thead > tr > td.arrow-down {
+    background-repeat: no-repeat;
+    background-position: center right 5px;
+    background-image: url("data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='none' d='M0 0h24v24H0V0z'/%3E%3Cpath d='M7 10l5 5 5-5H7z' fill='gray'/%3E%3C/svg%3E");
+    text-decoration: underline;
+}

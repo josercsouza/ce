@@ -13068,13 +13068,19 @@ if (! jSuites && typeof(require) === 'function') {
             if (scrollLeft > 50) {
                 for (var i = 0; i < obj.options.freezeColumns; i++) {
                     if (i > 0) {
-                        width += parseInt(obj.options.columns[i-1].width);
+                        // width += parseInt(obj.options.columns[i-1].width);
+                        // Must check if the previous column is hidden or not to determin whether the width shoule be added or not!
+                        if (obj.options.columns[i - 1].type !== "hidden") {
+                            width += parseInt(obj.options.columns[i - 1].width);
+                        }
                     }
                     obj.headers[i].classList.add('jexcel_freezed');
                     obj.headers[i].style.left = width + 'px';
                     for (var j = 0; j < obj.rows.length; j++) {
                         if (obj.rows[j] && obj.records[j][i]) {
-                            var shifted = (scrollLeft + (i > 0 ? obj.records[j][i-1].style.width : 0)) - 51 + 'px';
+                            // var shifted = (scrollLeft + (i > 0 ? obj.records[j][i-1].style.width : 0)) - 51 + 'px';
+                            var indexColumnWidth = (obj.table.classList.contains('jexcel_hidden_index') ? 1 : 51)
+                            var shifted = (scrollLeft + (i > 0 ? obj.records[j][i-1].style.width : 0)) - indexColumnWidth + 'px';
                             obj.records[j][i].classList.add('jexcel_freezed');
                             obj.records[j][i].style.left = shifted;
                         }

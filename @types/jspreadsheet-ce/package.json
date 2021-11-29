@@ -1,0 +1,57 @@
+{
+  "_from": "@types/jspreadsheet-ce@^4.7.2",
+  "_id": "@types/jspreadsheet-ce@4.7.2",
+  "_inBundle": false,
+  "_integrity": "sha512-Q/lxDSg6ZlxmcWR/RIs2HFXkPCk4nRn6J4qceWIt2Z3+gYNppBfv9Q8Vr1PtaigTFZdd2i8+jo1IVKqxwls1Hw==",
+  "_location": "/@types/jspreadsheet-ce",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "@types/jspreadsheet-ce@^4.7.2",
+    "name": "@types/jspreadsheet-ce",
+    "escapedName": "@types%2fjspreadsheet-ce",
+    "scope": "@types",
+    "rawSpec": "^4.7.2",
+    "saveSpec": null,
+    "fetchSpec": "^4.7.2"
+  },
+  "_requiredBy": [
+    "#DEV:/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@types/jspreadsheet-ce/-/jspreadsheet-ce-4.7.2.tgz",
+  "_shasum": "06d1b8225f459564ef260290a0e59160aeeac360",
+  "_spec": "@types/jspreadsheet-ce@^4.7.2",
+  "_where": "C:\\GSGIT\\RFWEB\\rf",
+  "bugs": {
+    "url": "https://github.com/DefinitelyTyped/DefinitelyTyped/issues"
+  },
+  "bundleDependencies": false,
+  "contributors": [
+    {
+      "name": "arx-8",
+      "url": "https://github.com/arx-8"
+    },
+    {
+      "name": "vishnutsivan",
+      "url": "https://github.com/vishnutsivan"
+    }
+  ],
+  "dependencies": {},
+  "deprecated": false,
+  "description": "TypeScript definitions for jspreadsheet-ce",
+  "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/jspreadsheet-ce",
+  "license": "MIT",
+  "main": "",
+  "name": "@types/jspreadsheet-ce",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+    "directory": "types/jspreadsheet-ce"
+  },
+  "scripts": {},
+  "typeScriptVersion": "3.6",
+  "types": "index.d.ts",
+  "typesPublisherContentHash": "437e6bc8610d9ba347792c40ad79ee5ef38eaf717c4a73447cce5d753a6e5220",
+  "version": "4.7.2"
+}
