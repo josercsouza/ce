@@ -438,6 +438,7 @@ declare namespace jspreadsheet {
                   /** (e.g.) "0", "1" ... */
                   rowIndex: string,
                   value: CellValue,
+                  oldValue: CellValue
               ) => void)
             | undefined;
         /** On header change */
@@ -532,6 +533,9 @@ declare namespace jspreadsheet {
         /** On undo is applied */
         // tslint:disable-next-line ban-types
         onundo?: Function | undefined;
+        /** On any event is applied */
+        // tslint:disable-next-line ban-types
+        onevent?: Function | undefined;
     }
 
     interface InitializationOptions {

@@ -1,13 +1,23 @@
+--------------------------------- v 4.7.2 -- Jul, 13 2021
 - @types/jspreadsheet-ce/index.d.ts
 linhas
 +125    'number'
 
-+650    /** Define the number of freeze columns on left with tableOverflow=true */
-+651    freezeColumns?:number | undefined;
-+652    /** Include headers on copy cells */
-+653    includeHeadersOnCopy?: boolean | undefined;
+ 440	value: CellValue,
++441	oldValue: CellValue
 
----------------------------------
+ 535	onundo?: Function | undefined;
++536	/** On any event is applied */
++537    // tslint:disable-next-line ban-types
++538	onevent?: Function | undefined;
+
+ 653	wordWrap?: boolean | undefined;
++654    /** Define the number of freeze columns on left with tableOverflow=true */
++655    freezeColumns?:number | undefined;
++656    /** Include headers on copy cells */
++657    includeHeadersOnCopy?: boolean | undefined;
+
+--------------------------------- v 4.9.3 -- Nov, 22 2021
 - node_modules\jspreadsheet-ce\src\index.js
 +/- linha 13065
         obj.updateFreezePosition = function() {
@@ -52,6 +62,8 @@ linhas
         }
 
 
+================================
+ESTUDOS
 ================================
 
 instance.thead.firstElementChild.children[x].style.backgroundColor = "red";
