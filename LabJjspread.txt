@@ -17,8 +17,8 @@ linhas
 +656    /** Include headers on copy cells */
 +657    includeHeadersOnCopy?: boolean | undefined;
 
---------------------------------- v 4.9.3 -- Nov, 22 2021
-- node_modules\jspreadsheet-ce\src\index.js
+--------------------------------- v 4.9.5 -- Nov, 22 2021
+- node_modules\jspreadsheet-ce\dist\index.js
 +/- linha 13065
         obj.updateFreezePosition = function() {
             scrollLeft = obj.content.scrollLeft;
@@ -61,6 +61,47 @@ linhas
             obj.updateCornerPosition();
         }
 
++/- linha 7147
+       var validDate = function(date) {
+            date = ''+date;
+            if (date.substr(4,1) == '-' && date.substr(7,1) == '-') {
+                return true;
+            } else {
+                date = date.split('-');
+                if ((date[0].length == 4 && date[0] == Number(date[0]) && date[1].length == 2 && date[1] == Number(date[1]))) {
+                    return true;
+                }
+            }
+            return false;
+        }
+	
++/- linha 7213
+                    // Try formatted date
+                    var formatted = null;
+                    if (! validDate(value)) {
+                        var tmp = jSuites.calendar.extractDateFromString(value, obj.options.columns[i].options.format);
+                        if (tmp) {
+                            formatted = tmp;
+                        }
+                    }
+                    // Create calendar cell
+
++/- linha 8461
+                        // Try formatted date
+                        var formatted = null;
+                        if (! validDate(value)) {
+                            var tmp = jSuites.calendar.extractDateFromString(value, obj.options.columns[x].options.format);
+                            if (tmp) {
+                                formatted = tmp;
+                            }
+                        }
+                        // Update data and cell
+
++/- linha 9731
+                // Test order
+                var temp = [];
+                if (obj.options.columns[column].type == 'numeric' || obj.options.columns[column].type == 'number' || obj.options.columns[column].type == 'percentage' || obj.options.columns[column].type == 'autonumber' || obj.options.columns[column].type == 'color') {
+                    for (var j = 0; j < obj.options.data.length; j++) {
 
 ================================
 ESTUDOS
