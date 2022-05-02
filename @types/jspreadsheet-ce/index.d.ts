@@ -235,7 +235,7 @@ declare namespace jspreadsheet {
         hideIndex?: Function | undefined;
         /** hide row by number    myTable.hideRow([int]); */
         // tslint:disable-next-line ban-types
-        hideRow: (rowNumber: number) => any;
+        hideRow?: Function | undefined;
         /**
          * add a new column
          * @param mixed - num of columns to be added or data to be added in one single column
