@@ -1,21 +1,36 @@
 --------------------------------- v 4.7.2 -- Jul, 13 2021
 - @types/jspreadsheet-ce/index.d.ts
 linhas
-+125    'number'
++123    'number'
 
- 440	value: CellValue,
-+441	oldValue: CellValue
+        /** Get the row data in JSON format
+         * @param number
+         * myTable.getJsonRow(rowNumber);
+         */
+        // tslint:disable-next-line ban-types
+        getJsonRow?: Function | undefined;
 
- 535	onundo?: Function | undefined;
-+536	/** On any event is applied */
-+537    // tslint:disable-next-line ban-types
-+538	onevent?: Function | undefined;
+        /** hide row by number    myTable.hideRow([int]); */
+        // tslint:disable-next-line ban-types
+        hideRow: (rowNumber: number) => any;
 
- 653	wordWrap?: boolean | undefined;
-+654    /** Define the number of freeze columns on left with tableOverflow=true */
-+655    freezeColumns?:number | undefined;
-+656    /** Include headers on copy cells */
-+657    includeHeadersOnCopy?: boolean | undefined;
+        /** show row by number    myTable.showRow([int]); */
+        // tslint:disable-next-line ban-types
+        showRow?: Function | undefined;
+
+ 434	value: CellValue,
++435	oldValue: CellValue
+
+ 507	onundo?: Function | undefined;
++508	/** On any event is applied */
++509    // tslint:disable-next-line ban-types
++510	onevent?: Function | undefined;
+
+ 623	wordWrap?: boolean | undefined;
++624    /** Define the number of freeze columns on left with tableOverflow=true */
++625    freezeColumns?:number | undefined;
++626    /** Include headers on copy cells */
++627    includeHeadersOnCopy?: boolean | undefined;
 
 --------------------------------- v 4.9.5 -- Nov, 22 2021
 - node_modules\jspreadsheet-ce\dist\index.js
@@ -74,7 +89,7 @@ linhas
             }
             return false;
         }
-	
+
 +/- linha 7213
                     // Try formatted date
                     var formatted = null;

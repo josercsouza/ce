@@ -42,9 +42,7 @@ declare namespace jspreadsheet {
          * Translations can be done here
          * Default: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
          */
-        months?:
-            | [string, string, string, string, string, string, string, string, string, string, string, string]
-            | undefined;
+        months?: [string, string, string, string, string, string, string, string, string, string, string, string] | undefined;
         // tslint:disable-next-line ban-types
         onchange?: Function | undefined;
         /** Events */
@@ -96,7 +94,7 @@ declare namespace jspreadsheet {
         /**
          * Default: "center"
          */
-        align?: 'center' | 'left' | 'right' | undefined;
+        align?: "center" | "left" | "right" | undefined;
         autocomplete?: boolean | undefined;
         decimal?: string | undefined;
         editor?: ColumnEditor | undefined;
@@ -113,18 +111,18 @@ declare namespace jspreadsheet {
          * @see https://bossanova.uk/jexcel/v4/examples/column-types
          */
         type?:
-            | 'autocomplete'
-            | 'calendar'
-            | 'checkbox'
-            | 'color'
-            | 'dropdown'
-            | 'hidden'
-            | 'html'
-            | 'image'
-            | 'numeric'
-            | 'number'
-            | 'radio'
-            | 'text'
+            | "autocomplete"
+            | "calendar"
+            | "checkbox"
+            | "color"
+            | "dropdown"
+            | "hidden"
+            | "html"
+            | "image"
+            | "numeric"
+            | "number"
+            | "radio"
+            | "text"
             | undefined;
         url?: string | undefined;
         width?: number | undefined;
@@ -152,19 +150,8 @@ declare namespace jspreadsheet {
     }
 
     interface MethodsOptions {
-        /**
-         * remove column by number
-         * @param integer columnNumber - Which column should be excluded starting on zero
-         * @param integer numOfColumns - number of columns to be excluded from the reference column    myTable.deleteColumn([integer], [integer]);
-         */
         // tslint:disable-next-line ban-types
         deleteColumn?: Function | undefined;
-        /**
-         * remove row by number
-         * @param integer rowNumber - Which row should be excluded starting on zero
-         * @param integer numOfRows - number of lines to be excluded
-         * myTable.deleteRow([integer], [integer]);
-         */
         // tslint:disable-next-line ban-types
         deleteRow?: Function | undefined;
         /** Destroy all merged cells    myTable.destroyMerge(); */
@@ -201,9 +188,15 @@ declare namespace jspreadsheet {
         /** get the current row height @param integer rowNumber - row number starting on zero    myTable.getHeight([integer]); */
         // tslint:disable-next-line ban-types
         getHeight?: Function | undefined;
-        /** Get the full or partial table data in JSON format @param boolean onlyHighlighedCells - Get only highlighted cells    myTable.getData([bool]); */
+        /** Get the full or partial table data in JSON format @param boolean onlyHighlighedCells - Get only highlighted cells    myTable.getJson([bool]); */
         // tslint:disable-next-line ban-types
         getJson?: Function | undefined;
+        /** Get the row data in JSON format
+         * @param number
+         * myTable.getJsonRow(rowNumber);
+         */
+        // tslint:disable-next-line ban-types
+        getJsonRow?: Function | undefined;
         /** get current cell DOM innerHTML @param string columnName - str compatible with excel, or as object.    myTable.getLabel([string]); */
         // tslint:disable-next-line ban-types
         getLabel?: Function | undefined;
@@ -240,6 +233,9 @@ declare namespace jspreadsheet {
         /** hide column of index numbers    myTable.hideIndex(); */
         // tslint:disable-next-line ban-types
         hideIndex?: Function | undefined;
+        /** hide row by number    myTable.hideRow([int]); */
+        // tslint:disable-next-line ban-types
+        hideRow: (rowNumber: number) => any;
         /**
          * add a new column
          * @param mixed - num of columns to be added or data to be added in one single column
@@ -372,12 +368,15 @@ declare namespace jspreadsheet {
          */
         // tslint:disable-next-line ban-types
         setWidth?: Function | undefined;
-        /** show column by number    myTable.showIndex([int]); */
+        /** show column by number    myTable.showColumn([int]); */
         // tslint:disable-next-line ban-types
         showColumn?: Function | undefined;
         /** show column of index numbers    myTable.showIndex(); */
         // tslint:disable-next-line ban-types
         showIndex?: Function | undefined;
+        /** show row by number    myTable.showRow([int]); */
+        // tslint:disable-next-line ban-types
+        showRow?: Function | undefined;
         /** Undo last changes    myTable.undo(); */
         // tslint:disable-next-line ban-types
         undo?: Function | undefined;
@@ -408,7 +407,7 @@ declare namespace jspreadsheet {
                   cell: HTMLTableCellElement,
                   columnIndex: number,
                   rowIndex: number,
-                  value: CellValue,
+                  value: CellValue
               ) => CellValue | void)
             | undefined;
         /** Before a column is excluded. You can cancel the insert event by returning false. */
@@ -416,13 +415,9 @@ declare namespace jspreadsheet {
         /** Before a row is deleted. You can cancel the delete event by returning false. */
         onbeforedeleterow?: ((instance: HTMLElement, startRowIndex: number, count: number) => void) | undefined;
         /** Before a new column is inserted. You can cancel the insert event by returning false. */
-        onbeforeinsertcolumn?:
-            | ((instance: HTMLElement, startColumnIndex: number, count: number, isBefore: boolean) => void)
-            | undefined;
+        onbeforeinsertcolumn?: ((instance: HTMLElement, startColumnIndex: number, count: number, isBefore: boolean) => void) | undefined;
         /** Before a new row is inserted. You can cancel the insert event by returning false. */
-        onbeforeinsertrow?:
-            | ((instance: HTMLElement, startColumnIndex: number, count: number, isBefore: boolean) => void)
-            | undefined;
+        onbeforeinsertrow?: ((instance: HTMLElement, startColumnIndex: number, count: number, isBefore: boolean) => void) | undefined;
         /** Before the paste action is performed. Used to parse any input data, should return the data. */
         // tslint:disable-next-line ban-types
         onbeforepaste?: Function | undefined;
@@ -455,46 +450,24 @@ declare namespace jspreadsheet {
         onchangestyle?: Function | undefined;
         /** After a column is excluded. */
         ondeletecolumn?:
-            | ((
-                  instance: HTMLElement,
-                  startColumnIndex: number,
-                  count: number,
-                  cells: HTMLTableCellElement[][],
-              ) => void)
+            | ((instance: HTMLElement, startColumnIndex: number, count: number, cells: HTMLTableCellElement[][]) => void)
             | undefined;
         /** After a row is excluded. */
-        ondeleterow?:
-            | ((instance: HTMLElement, startRowIndex: number, count: number, cells: HTMLTableCellElement[][]) => void)
-            | undefined;
+        ondeleterow?: ((instance: HTMLElement, startRowIndex: number, count: number, cells: HTMLTableCellElement[][]) => void) | undefined;
         /** When a closeEditor is called. */
         oneditionend?:
-            | ((
-                  instance: HTMLElement,
-                  cell: HTMLTableCellElement,
-                  columnIndex: string,
-                  rowIndex: string,
-                  value: CellValue,
-              ) => void)
+            | ((instance: HTMLElement, cell: HTMLTableCellElement, columnIndex: string, rowIndex: string, value: CellValue) => void)
             | undefined;
         /** When a openEditor is called. */
-        oneditionstart?:
-            | ((instance: HTMLElement, cell: HTMLTableCellElement, columnIndex: string, rowIndex: string) => void)
-            | undefined;
+        oneditionstart?: ((instance: HTMLElement, cell: HTMLTableCellElement, columnIndex: string, rowIndex: string) => void) | undefined;
         /** On table focus */
         onfocus?: ((instance: HTMLElement) => void) | undefined;
         /** After a new column is inserted. */
         oninsertcolumn?:
-            | ((
-                  instance: HTMLElement,
-                  startColumnIndex: number,
-                  count: number,
-                  cells: HTMLTableCellElement[][],
-              ) => void)
+            | ((instance: HTMLElement, startColumnIndex: number, count: number, cells: HTMLTableCellElement[][]) => void)
             | undefined;
         /** After a new row is inserted. */
-        oninsertrow?:
-            | ((instance: HTMLElement, startRowIndex: number, count: number, cells: HTMLTableCellElement[][]) => void)
-            | undefined;
+        oninsertrow?: ((instance: HTMLElement, startRowIndex: number, count: number, cells: HTMLTableCellElement[][]) => void) | undefined;
         /** This method is called when the method setData */
         onload?: ((instance: HTMLElement) => void) | undefined;
         /** On column merge */
@@ -524,7 +497,7 @@ declare namespace jspreadsheet {
                   startColumnIndex: number,
                   startRowIndex: number,
                   endColumnIndex: number,
-                  endRowIndex: number,
+                  endRowIndex: number
               ) => void)
             | undefined;
         /** After a colum is sorted. */
@@ -583,7 +556,7 @@ declare namespace jspreadsheet {
         /** Load this data into the javascript table: array */
         data?: CellValue[][] | Array<{ [title in string | number]: CellValue }> | undefined;
         /** Default align for a new column: [center, left, right] */
-        defaultColAlign?: 'center' | 'left' | 'right' | undefined;
+        defaultColAlign?: "center" | "left" | "right" | undefined;
         /** Default width for a new column: integer */
         defaultColWidth?: number | undefined;
         /** Allow table edition: bool */
@@ -644,15 +617,13 @@ declare namespace jspreadsheet {
         /** Add custom toolbars: object */
         toolbar?: Array<Record<string, any>> | undefined;
         /** Method to config custom script execution. NOTE: This does not work with lazyLoading, Pagination or Search options. */
-        updateTable?:
-            | ((instance: any, cell: any, col: any, row: any, val: any, label: any, cellName: any) => void)
-            | undefined;
+        updateTable?: ((instance: any, cell: any, col: any, row: any, val: any, label: any, cellName: any) => void) | undefined;
         /** Load a external json file from this URL: string */
         url?: string | undefined;
         /** Global text wrapping: bool */
         wordWrap?: boolean | undefined;
         /** Define the number of freeze columns on left with tableOverflow=true */
-        freezeColumns?:number | undefined;
+        freezeColumns?: number | undefined;
         /** Include headers on copy cells */
         includeHeadersOnCopy?: boolean | undefined;
     }
@@ -746,7 +717,17 @@ declare namespace jspreadsheet {
 
     interface JSpreadsheetElement {
         ads: HTMLDivElement;
+        /**
+         * Close the editor and save the information
+         *
+         * @param object cell
+         * @param boolean save
+         * @return void
+         */
         closeEditor: (cell: object, save: boolean) => any;
+        /**
+         * Get col number
+         */
         col: (cell: object) => any;
         colgroup: HTMLTableColElement[];
         colgroupContainer: any;
@@ -763,7 +744,7 @@ declare namespace jspreadsheet {
          * @param delimiter - \t default to keep compatibility with excel
          * @return string value
          */
-        copy: (highlighted?: boolean, delimiter?: string, returnData?: boolean) => string;
+        copy: (highlighted?: boolean, delimiter?: string, returnData?: boolean, includeHeaders?: any, download?: boolean) => string;
         /**
          * Helper function to copy data using the corner icon
          */
@@ -777,11 +758,28 @@ declare namespace jspreadsheet {
         createToolbar: (toolbar: object[]) => void;
         cursor: any;
         data: any;
+        /**
+         * remove column by number
+         * @param integer columnNumber - Which column should be excluded starting on zero
+         * @param integer numOfColumns - number of columns to be excluded from the reference column    myTable.deleteColumn([integer], [integer]);
+         */
         deleteColumn: (columnNumber: any, numOfColumns: any) => any;
+        /**
+         * remove row by number
+         * @param integer rowNumber - Which row should be excluded starting on zero
+         * @param integer numOfRows - number of lines to be excluded
+         * myTable.deleteRow([integer], [integer]);
+         */
         deleteRow: (rowNumber: any, numOfRows: any) => any;
         destroy: () => any;
+        /** Destroy all merged cells    myTable.destroyMerge(); */
         destroyMerged: (keepOptions: any) => any;
         down: (shiftKey: any, ctrlKey: any) => any;
+        /**
+         * get the current data as a CSV file
+         * @param bool - true to download parsed formulas.
+         * myTable.download([bool]);
+         */
         download: (includeHeaders: any) => any;
         dragging: any;
         edition: any;
@@ -790,36 +788,74 @@ declare namespace jspreadsheet {
         filter: HTMLDivElement;
         first: (shiftKey: any, ctrlKey: any) => any;
         formula: any[];
+        /**
+         * Activate/Disable fullscreen
+         * use programmatically : table.fullscreen(); or table.fullscreen(true); or table.fullscreen(false);
+         * @Param {boolean} activate
+         */
         fullscreen: (activate: any) => any;
+        /** get current cell DOM @param string columnName - str compatible with excel, or as object.    myTable.getCell([string]); */
         getCell: (cell: any) => any;
         getCellFromCoords: (x: number, y: number) => any;
+        /** Get the data from one column by number @param integer columnNumber - Column number    myTable.getColumnData([int]); */
         getColumnData: (columnNumber: number) => CellValue[];
+        /** get cell comments @param mixed - cell identification or null for the whole table.    myTable.getComments([string]); */
         getComments: (cell: any, withAuthor: any) => any;
+        /** get table definitions    myTable.getConfig(); */
         getConfig: () => any;
+        /** Get the full or partial table data
+         * @param boolean highlighted - Get only highlighted cells
+         * @param boolean dataOnly - Get only data    myTable.getData([bool],[bool]); */
         getData: (highlighted?: boolean, dataOnly?: boolean) => CellValue[][];
         getDropDownValue: (column: any, key: any) => any;
+        /** get the current header by column number
+         * @param integer columnNumber - Column number starting on zero    myTable.getHeader([integer]); */
         getHeader: (column: any) => any;
+        /** get all header titles    myTable.getHeaders(); */
         getHeaders: (asArray: any) => any;
+        /** get the current row height @param integer rowNumber - row number starting on zero    myTable.getHeight([integer]); */
         getHeight: (row: any) => any;
+        /**
+         * Get highlighted
+         *
+         * @return array
+         */
         getHighlighted: () => any;
+        /** Get the full or partial table data in JSON format @param boolean onlyHighlighedCells - Get only highlighted cells    myTable.getJson([bool]); */
         getJson: (highlighted?: boolean) => any;
+        /** Get the row data in JSON format @param number     myTable.getJsonRow(rowNumber); */
+        getJsonRow: (rowNumber: number) => any;
+        /** get current cell DOM innerHTML @param string columnName - str compatible with excel, or as object.    myTable.getLabel([string]); */
         getLabel: (cell: any) => any;
         getLabelFromCoords: (x: number, y: number) => any;
+        /** Get merged cells properties @param string columnName - Column name, such as A1.    myTable.getMerge([string]); */
         getMerge: (cellName: any) => any;
+        /** get the table or cell meta information @param mixed - cell identification or null for the whole table.    myTable.getMeta([string]); */
         getMeta: (cell: any, key: any) => any;
+        /** Get the data from one row by number @param integer rowNumber - Row number    myTable.getRowData([int]); */
         getRowData: (rowNumber: number) => any;
+        /** Get the selected columns @param boolean asIds - Get the colNumbers or row DOM elements    myTable.getSelectedColumns([bool]); */
         getSelectedColumns: () => any;
+        /** Get the selected rows @param boolean asIds - Get the rowNumbers or row DOM elements    myTable.getSelectedRows([bool]); */
         getSelectedRows: (asIds?: boolean) => any;
+        /** get table or cell style @param mixed - cell identification or null for the whole table.    myTable.getStyle([string])); */
         getStyle: (cell: any, key: any) => any;
+        /** get current cell value @param mixed cellIdent - str compatible with excel, or as object.    myTable.getValue([string]); */
         getValue: (cell: any, processedValue: any) => any;
+        /** get value from coords @param integer x @param integer y myTable.getValueFromCoords([integer], [integer]); */
         getValueFromCoords: (x: number, y: number, processedValue: any) => any;
+        /** get the current column width @param integer columnNumber - column number starting on zero    myTable.getWidth([integer]); */
         getWidth: (column: any) => any;
         hash: (str: any) => any;
         hashString: any;
         headerContainer: HTMLTableRowElement;
         headers: any;
+        /** hide column by number    myTable.hideColumn([int]); */
         hideColumn: (colNumber: number) => any;
+        /** hide column of index numbers    myTable.hideIndex(); */
         hideIndex: () => any;
+        /** hide row by number    myTable.hideRow([int]); */
+        hideRow: (rowNumber: number) => any;
         highlighted: any[];
         history: ActionHistory;
         historyIndex: number;
@@ -829,17 +865,24 @@ declare namespace jspreadsheet {
         ignoreHistory: boolean;
         init: () => any;
         /**
-         * Insert a new column
-         *
+         * add a new column
          * @param mixed - num of columns to be added or data to be added in one single column
          * @param int columnNumber - number of columns to be created
-         * @param bool insertBefore
+         * @param boolean insertBefore
          * @param object properties - column properties
-         * @return void
+         * myTable.insertColumn([mixed], [integer], [boolean], [object]);
          */
         insertColumn: (mixed: any, columnNumber?: number, insertBefore?: boolean, properties?: object) => any;
+        /**
+         * add a new row
+         * @param mixed - number of blank lines to be insert or a single array with the data of the new row
+         * @param integer rowNumber - reference row number
+         * @param boolean insertBefore
+         * myTable.insertRow([mixed], [integer], [boolean]);
+         */
         insertRow: (mixed?: any, rowNumber?: number, insertBefore?: boolean) => any;
         isColMerged: (x: number, insertBefore?: boolean) => any;
+        isReadOnly: (cell: any) => any;
         isRowMerged: (y: number, insertBefore?: boolean) => any;
         last: (shiftKey: any, ctrlKey: any) => any;
         left: (shiftKey: any, ctrlKey: any) => any;
@@ -847,12 +890,31 @@ declare namespace jspreadsheet {
         loadPage: (pageNumber: number) => any;
         loadUp: () => any;
         loadValidation: () => any;
+        /**
+         * change the column position
+         * @param integer columnPosition
+         * @param integer newColumnPosition
+         * myTable.moveColumn([integer], [integer]);
+         */
         moveColumn: (o: any, d: any) => any;
+        /**
+         * change the row position
+         * @param integer rowPosition
+         * @param integer newRowPosition
+         * myTable.moveRow([integer], [integer]);
+         */
         moveRow: (o: any, d: any, ignoreDom: any) => any;
         onafterchanges: (el: any, records: any) => any;
         openEditor: (cell: any, empty: any, e: any) => any;
         options: any;
+        /**
+         * reorder a column asc or desc
+         * @param integer columnNumber - column number starting on zero
+         * @param smallint sortType - One will order DESC, zero will order ASC, anything else will toggle the current order
+         * myTable.orderBy([integer], [boolean]);
+         */
         orderBy: (column: number, order?: 0 | 1) => any;
+        /** Go to page number- Valid only when pagination is true. @param integer - Go to page number    myTable.page([integer]); */
         page: (pageNumber: number) => any;
         pageNumber: any;
         pagination: HTMLDivElement;
@@ -861,13 +923,18 @@ declare namespace jspreadsheet {
         paste: (x?: number, y?: number, data?: CellValue) => any;
         prepareTable: () => any;
         records: any;
+        /** Redo changes    myTable.redo(); */
         redo: () => any;
         refresh: () => any;
         refreshSelection: () => any;
         removeCopySelection: () => any;
+        /** Destroy merged by column name @param string columnName - Column name, such as A1.    myTable.removeMerge([string]); */
         removeMerge: (cellName: any, data: any, keepOptions: any) => any;
+        /** reset search table    myTable.resetSearch(); */
         resetSearch: () => any;
+        /** Reset the table selection @param boolean executeBlur - execute the blur from the table myTable.resetSelection([bool]); */
         resetSelection: (blur: any) => any;
+        /** remove all style from a cell @param string columnName - Column name, example: A1, B3, etc    myTable.resetStyle([string]); */
         resetStyle: (o: any, ignoreHistoryAndEvents: any) => any;
         resizing: any;
         results: any;
@@ -882,27 +949,87 @@ declare namespace jspreadsheet {
         selectedContainer: any;
         selection: any[];
         setCheckRadioValue: () => any;
+        /** Set the data from one column by number @param integer columnNumber - Column number @param array colData - Column data    myTable.setColumnData([int], [array]); */
         setColumnData: (colNumber: number, data?: any) => any;
+        /** set cell comments @param cell - cell identification @param text - comments    myTable.setComments([string], [string]); */
         setComments: (cellId: any, comments: any, author: any) => any;
+        /** Set the table data @param json newData - New json data, null will reload what is in memory.    myTable.setData([json]); */
         setData: (data: any) => any;
+        setFooter: (data: any) => any;
+        /** change header by column @param integer columnNumber - column number starting on zero @param string columnTitle - New header title    myTable.setHeader([integer], [string]); */
         setHeader: (column: any, newValue: any) => any;
+        /**
+         * Set the row height
+         *
+         * @param row - row number (first row is: 0)
+         * @param height - new row height
+         * @param oldHeight - old row height
+         */
         setHeight: (row: any, height: any, oldHeight: any) => any;
         setHistory: (changes: any) => any;
+        /**
+         * Merge cells
+         * @param string columnName - Column name, such as A1.
+         * @param integer colspan - Number of columns
+         * @param integer rowspan - Number of rows
+         * myTable.setMerge([string], [int], [int]);
+         */
         setMerge: (cellName: any, colspan: any, rowspan: any, ignoreHistoryAndEvents?: any) => any;
+        /** set the table or cell meta information @param mixed - json with whole table meta information.    myTable.setMeta[mixed]); */
         setMeta: (o: any, k: any, v: any) => any;
+        setReadOnly: (cell: any, state: any) => any;
+        /**
+         * Set the data from one row by number
+         * @param integer rowNumber - Row number
+         * @param array rowData - Row data
+         * myTable.setRowData([int], [array]);
+         */
         setRowData: (rowNumber: number, data: any) => any;
+        /**
+         * set cell(s) CSS style
+         * @param mixed - json with whole table style information or just one cell identification. Ex. A1.
+         * @param k [optional]- CSS key
+         * @param v [optional]- CSS value
+         * myTable.setSyle([object], [string], [string]);
+         */
         setStyle: (o: any, k: any, v: any, force?: any, ignoreHistoryAndEvents?: any) => any;
+        /**
+         * change the cell value
+         * @param mixed cell - str compatible with excel, or as object.
+         * @param string value - new value for the cell
+         * @param bool force - update readonly columns
+         * myTable.setValue([string], [string], [bool]);
+         */
         setValue: (cell: any, value: any, force: any) => any;
+        /**
+         * get value from coords
+         * @param integer x
+         * @param integer y
+         * @param string value - new value for the cell
+         * @param bool force - update readonly columns
+         * myTable.getValueFromCoords([integer], [integer], [string], [bool]);
+         */
         setValueFromCoords: (x: number, y: number, value: any, force: any) => any;
+        /**
+         * change column width
+         * @param integer columnNumber - column number starting on zero
+         * @param string newColumnWidth - New column width
+         * myTable.setWidth([integer], [integer]);
+         */
         setWidth: (column: any, width: any, oldWidth: any) => any;
+        /** show column by number    myTable.showColumn([int]); */
         showColumn: (colNumber: number) => any;
+        /** show column of index numbers    myTable.showIndex(); */
         showIndex: () => any;
+        /** show row by number    myTable.showRow([int]); */
+        showRow: (rowNumber: number) => any;
         style: any[];
         table: HTMLTableElement;
         tbody: HTMLTableSectionElement;
         textarea: HTMLTextAreaElement;
         thead: HTMLTableHeaderCellElement;
         toolbar: HTMLDivElement;
+        /** Undo last changes    myTable.undo(); */
         undo: () => any;
         up: (shiftKey: any, ctrlKey: any) => any;
         updateCell: (x: number, y: number, value?: CellValue, force?: any) => any;
@@ -912,14 +1039,24 @@ declare namespace jspreadsheet {
         updateFormulaChain: (x: any, y: any, records: any) => any;
         updateFormulas: (referencesToUpdate: any) => any;
         updateMeta: (affectedCells: any) => any;
+        updateNestedHeader: (x: number, y: number, title: string) => any;
         updateOrder: (rows: any) => any;
         updateOrderArrow: (column: any, order: any) => any;
         updatePagination: () => any;
         updateScroll: (direction: any) => any;
+        /**
+         * select cells
+         * @param object el1 - cell object
+         * @param object el2 - cell object
+         * @param boolean origin - ignore onselection event
+         * myTable.updateSelection([cell], [cell], true);
+         */
         updateSelection: (el1: any, el2: any, origin: any) => any;
+        /** select cells @param integer x1 @param integer y1 @param integer x2 @param integer y2    myTable.updateSelectionFromCoords([integer], [integer], [integer], [integer]); */
         updateSelectionFromCoords: (x1: number, y1: number, x2: number, y2: number, origin: any) => any;
         updateTable: () => any;
         updateTableReferences: () => any;
+        /** Which page showing on jExcel - Valid only when pagination is true.    myTable.whichPage(); */
         whichPage: (cell: any) => any;
     }
 
@@ -934,6 +1071,7 @@ declare namespace jspreadsheet {
         contextMenuControls: Function;
         // tslint:disable-next-line ban-types
         copyControls: Function;
+        createFromTable: Function;
         createTabs: (element: HTMLDivElement, result: any[]) => void;
         current: any;
         // tslint:disable-next-line ban-types
@@ -969,6 +1107,8 @@ declare namespace jspreadsheet {
         mouseUpControls: Function;
         // tslint:disable-next-line ban-types
         pasteControls: Function;
+        setDictionary: Function;
+        setExtensions: Function;
         tabs: (element: HTMLDivElement, options?: TabOptions[]) => number[];
         timeControl: any;
         timeControlLoading: any;
@@ -978,5 +1118,6 @@ declare namespace jspreadsheet {
         touchStartControls: Function;
         // tslint:disable-next-line ban-types
         validLetter: Function;
+        version: any;
     }
 }
